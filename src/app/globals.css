@@ -1,26 +1,131 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* IVYXON Brand Colors:
+   --primary: #0B6E4F (Dark Green)
+   --accent:  #00D67E (Bright Green)
+   --dark:    #0A1F1A (Deep Forest)
+   --mid:     #134E3A (Forest Green)
+   --light:   #E8FFF5 (Pale Mint)
+*/
+
+:root {
+  --radius: 0.625rem;
+  --background: oklch(0.985 0.005 160);
+  --foreground: oklch(0.15 0.02 160);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.15 0.02 160);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.15 0.02 160);
+  --primary: oklch(0.42 0.12 162);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0.008 160);
+  --secondary-foreground: oklch(0.2 0.02 160);
+  --muted: oklch(0.97 0.008 160);
+  --muted-foreground: oklch(0.55 0.01 160);
+  --accent: oklch(0.78 0.18 162);
+  --accent-foreground: oklch(0.15 0.02 160);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.92 0.008 160);
+  --input: oklch(0.92 0.008 160);
+  --ring: oklch(0.42 0.12 162);
+}
+
+.dark {
+  --background: oklch(0.14 0.025 160);
+  --foreground: oklch(0.96 0.01 160);
+  --card: oklch(0.19 0.025 160);
+  --card-foreground: oklch(0.96 0.01 160);
+  --popover: oklch(0.19 0.025 160);
+  --popover-foreground: oklch(0.96 0.01 160);
+  --primary: oklch(0.78 0.18 162);
+  --primary-foreground: oklch(0.14 0.02 160);
+  --secondary: oklch(0.24 0.025 160);
+  --secondary-foreground: oklch(0.96 0.01 160);
+  --muted: oklch(0.24 0.025 160);
+  --muted-foreground: oklch(0.7 0.01 160);
+  --accent: oklch(0.24 0.025 160);
+  --accent-foreground: oklch(0.96 0.01 160);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.78 0.18 162);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Hide scrollbar */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Prose styles for article content */
+.prose {
+  @apply max-w-none;
+}
+.prose h1 { @apply text-3xl font-bold mt-8 mb-4 text-foreground; }
+.prose h2 { @apply text-2xl font-bold mt-8 mb-3 text-foreground border-b border-border pb-2; }
+.prose h3 { @apply text-xl font-semibold mt-6 mb-2 text-foreground; }
+.prose p { @apply my-4 leading-7 text-foreground/90; }
+.prose ul { @apply my-4 pl-6 list-disc space-y-1; }
+.prose ol { @apply my-4 pl-6 list-decimal space-y-1; }
+.prose li { @apply leading-7 text-foreground/90; }
+.prose a { @apply text-primary underline underline-offset-4 hover:text-primary/80; }
+.prose strong { @apply font-bold text-foreground; }
+.prose blockquote {
+  @apply border-l-4 border-primary/30 pl-4 my-4 italic text-muted-foreground;
+}
+.prose table { @apply my-4 w-full border-collapse; }
+.prose th { @apply border border-border bg-muted px-4 py-2 text-left font-semibold; }
+.prose td { @apply border border-border px-4 py-2; }
+.prose hr { @apply my-8 border-border; }
+.prose img { @apply rounded-lg my-4; }
+
+/* Code block wrapper */
+.prose pre {
+  @apply my-4 rounded-lg overflow-x-auto text-sm;
+}
+.prose :not(pre) > code {
+  @apply bg-muted px-1.5 py-0.5 rounded text-sm font-mono text-primary;
 }

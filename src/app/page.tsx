@@ -1,65 +1,113 @@
-import Image from "next/image";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { ArticleCard } from "@/components/article-card";
+import { CategoryCard } from "@/components/category-card";
+import { getAllArticleMetas, getFeaturedArticles, getCategoryCounts } from "@/lib/articles";
+import { categories, siteConfig } from "@/lib/config";
 
-export default function Home() {
+export default function HomePage() {
+  const allArticles = getAllArticleMetas();
+  const featured = getFeaturedArticles();
+  const counts = getCategoryCounts();
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <div>
+      {/* Hero */}
+      <section className="bg-[#0A1F1A] py-16 text-white">
+        <div className="mx-auto max-w-5xl px-4 text-center">
+          <p className="mb-3 text-sm tracking-widest text-[#00D67E]/70">
+            Powered by <span className="font-light">IVY</span><span className="font-bold">XON</span>
           </p>
+          <h1 className="mb-4 text-4xl font-bold tracking-tight sm:text-5xl">
+            Claude Codeに
+            <span className="text-[#00D67E]">雑に投げて</span>
+            <br />
+            アプリを作る
+          </h1>
+          <p className="mx-auto mb-8 max-w-2xl text-lg text-white/50">
+            {siteConfig.description}
+          </p>
+          <div className="flex justify-center gap-4">
+            <Button asChild size="lg" className="bg-[#0B6E4F] hover:bg-[#0B6E4F]/80">
+              <Link href="/articles">記事を読む</Link>
+            </Button>
+            <Button asChild size="lg" className="border border-[#00D67E]/30 bg-transparent text-white hover:bg-[#00D67E]/10">
+              <Link href="/categories">カテゴリ一覧</Link>
+            </Button>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+      </section>
+
+      {/* "やりたいことから探す" */}
+      <section className="mx-auto max-w-5xl px-4 pt-12 pb-4">
+        <h2 className="mb-6 text-2xl font-bold">🔍 やりたいことから探す</h2>
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {[
+            { q: "「アプリ作って」で始めたい", slug: "first-things-to-do", emoji: "🚀" },
+            { q: "壊れた。助けて", slug: "fix-broken-app", emoji: "🔥" },
+            { q: "見た目がダサい。なんとかして", slug: "make-it-pretty", emoji: "✨" },
+            { q: "スクショ見せて「これ作って」", slug: "screenshot-driven-dev", emoji: "📸" },
+            { q: "DB追加したい", slug: "add-database", emoji: "🗄️" },
+            { q: "テスト書いて・通して", slug: "write-tests", emoji: "🧪" },
+            { q: "Git操作・PR作成を任せたい", slug: "git-and-pr", emoji: "🔀" },
+            { q: "他人のコードを理解したい", slug: "read-someone-code", emoji: "🔍" },
+            { q: "CSV処理ツール作って", slug: "csv-excel-tools", emoji: "📊" },
+            { q: "API作ってフロントもつけて", slug: "api-development", emoji: "🔌" },
+            { q: "コードが汚い。きれいにして", slug: "refactor-cleanup", emoji: "🧹" },
+            { q: "デプロイして公開したい", slug: "deploy-app", emoji: "🌐" },
+          ].map((item) => (
+            <Link
+              key={item.slug}
+              href={`/articles/${item.slug}`}
+              className="flex items-center gap-3 rounded-lg border border-border bg-card p-4 transition-all hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-md"
+            >
+              <span className="text-2xl">{item.emoji}</span>
+              <span className="font-medium text-card-foreground">{item.q}</span>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* Category grid */}
+      <section className="mx-auto max-w-5xl px-4 py-8">
+        <h2 className="mb-6 text-2xl font-bold">カテゴリ</h2>
+        <div className="flex items-stretch gap-3 overflow-x-auto scrollbar-hide">
+          {categories.map((cat) => (
+            <CategoryCard
+              key={cat.id}
+              category={cat}
+              count={counts.get(cat.id) || 0}
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+          ))}
         </div>
-      </main>
+      </section>
+
+      {/* Featured articles */}
+      {featured.length > 0 && (
+        <section className="mx-auto max-w-5xl px-4 py-8">
+          <h2 className="mb-6 text-2xl font-bold">注目の記事</h2>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {featured.map((article) => (
+              <ArticleCard key={article.slug} article={article} />
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* Recent articles */}
+      <section className="mx-auto max-w-5xl px-4 py-8 pb-16">
+        <div className="mb-6 flex items-center justify-between">
+          <h2 className="text-2xl font-bold">最新の記事</h2>
+          <Link href="/articles" className="text-sm text-primary hover:underline">
+            すべて見る →
+          </Link>
+        </div>
+        <div className="flex flex-col gap-4">
+          {allArticles.slice(0, 5).map((article) => (
+            <ArticleCard key={article.slug} article={article} />
+          ))}
+        </div>
+      </section>
     </div>
   );
 }
