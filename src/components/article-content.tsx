@@ -105,8 +105,8 @@ function EnhancedContent({ html }: { html: string }) {
 
 export function ArticleContent({ html }: { html: string }) {
   return (
-    <div className="flex gap-8">
-      <div className="min-w-0 flex-1">
+    <div className="lg:flex lg:gap-8">
+      <div className="min-w-0 lg:flex-1">
         <EnhancedContent html={html} />
       </div>
       <div className="hidden w-56 shrink-0 lg:block">
