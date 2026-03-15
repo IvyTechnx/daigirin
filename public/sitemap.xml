@@ -210,6 +210,12 @@
     <lastmod>2026-03-11</lastmod>
   </url>
   <url>
+    <loc>https://tips.ivyxon.com/articles/multi-file-edit</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2026-03-15</lastmod>
+  </url>
+  <url>
     <loc>https://tips.ivyxon.com/articles/permission-settings</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -456,6 +462,11 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://tips.ivyxon.com/tags/%E3%83%AA%E3%83%95%E3%82%A1%E3%82%AF%E3%82%BF%E3%83%AA%E3%83%B3%E3%82%B0</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://tips.ivyxon.com/tags/%E6%A8%A9%E9%99%90</loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -482,11 +493,6 @@
   </url>
   <url>
     <loc>https://tips.ivyxon.com/tags/OSS</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://tips.ivyxon.com/tags/%E3%83%AA%E3%83%95%E3%82%A1%E3%82%AF%E3%82%BF%E3%83%AA%E3%83%B3%E3%82%B0</loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>

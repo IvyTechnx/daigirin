@@ -66,6 +66,47 @@ IVYXONブランドのサイドコンテンツとして、Claude Code初級者が
 - Dev: `npm run dev`
 - Build: `npm run build`（prebuildで検索インデックス自動生成）
 - 検索インデックス: `node scripts/build-search-index.mjs`
+- 記事生成: `npm run generate-article`（後述）
+- Deploy: `npm run build && wrangler pages deploy out --project-name claude-code-tips`（Git連携なし・手動デプロイ）
+
+## 週次記事生成パイプライン
+
+Anthropic公式ドキュメント・GitHub・コミュニティからクロールし、Claude APIで記事ドラフトを自動生成する。
+
+### 手順
+
+1. **APIキーを発行**: https://console.anthropic.com → API keys → Create Key
+2. **`.env`に保存**: `ANTHROPIC_API_KEY=sk-ant-xxxxxxxx`
+3. **記事を生成**:
+   ```bash
+   # バックログ確認
+   npm run generate-article -- --list
+
+   # 5記事まとめて生成
+   for i in $(seq 5); do node scripts/generate-article.mjs; done
+   ```
+4. **レビュー**: `npm run dev` → ブラウザで目視チェック → 修正
+5. **デプロイ**: `npm run build && wrangler pages deploy out --project-name claude-code-tips`
+6. **APIキーを削除**: Console → API keys → Revoke
+
+### オプション
+
+| フラグ | 用途 |
+|-------|------|
+| `--topic <slug>` | 特定トピックを指定 |
+| `--category <id>` | カテゴリで絞り込み |
+| `--dry-run` | API叩かずにプロンプト確認 |
+| `--no-crawl` | クロールをスキップ |
+| `--list` | バックログ一覧表示 |
+
+### 構成
+
+- `scripts/generate-article.mjs` — エントリポイント
+- `scripts/pipeline/topics.mjs` — トピックバックログ（トピック追加はここ）
+- `scripts/pipeline/crawl.mjs` — 3ソース（Anthropic Docs / GitHub / Reddit）クローラー
+- `scripts/pipeline/generate.mjs` — Claude APIで記事生成
+- `scripts/pipeline/dedup.mjs` — 既存記事との重複チェック
+- `scripts/pipeline/cache.mjs` — クロール結果キャッシュ（7日TTL）
 
 ## ブランド
 
