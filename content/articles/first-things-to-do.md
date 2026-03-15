@@ -1,7 +1,7 @@
 ---
 title: "「Todoアプリ作って」から始めるClaude Code入門"
 slug: "first-things-to-do"
-description: "Claude Codeに雑にアプリを作らせてみる。最初の一歩は「作って」の一言でいい。"
+description: "Claude Codeの使い方入門。「Todoアプリ作って」の一言で始める初心者向けチュートリアル【2026年版】"
 author: "daigirin"
 category: "tips"
 tags: ["入門", "プロンプト", "実録"]

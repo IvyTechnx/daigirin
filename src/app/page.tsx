@@ -77,6 +77,7 @@ export default function HomePage() {
               key={cat.id}
               category={cat}
               count={counts.get(cat.id) || 0}
+              compact
             />
           ))}
         </div>

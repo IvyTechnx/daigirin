@@ -1,7 +1,7 @@
 ---
 title: "「画像生成のMCPサーバーのベスプラ教えて」でどこまでいける？"
 slug: "image-gen-mcp"
-description: "Claude Codeに雑に聞いてMCPサーバーを探す→設定→使うまでの実録。コピペできるプロンプト付き。"
+description: "Claude Code MCPサーバーの画像生成おすすめ比較。設定方法からプロンプト例まで初心者向けに解説【2026年版】"
 author: "daigirin"
 category: "mcp"
 tags: ["MCP", "画像生成", "実録", "プロンプト"]

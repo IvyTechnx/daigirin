@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tips.ivyxon.com/sitemap.xml

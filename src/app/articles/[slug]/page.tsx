@@ -5,7 +5,7 @@ import { ArrowLeft } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { ArticleContent } from "@/components/article-content";
 import { getArticle, getAllSlugs } from "@/lib/articles";
-import { categories, difficultyConfig, articleTypeConfig } from "@/lib/config";
+import { categories, difficultyConfig, articleTypeConfig, siteConfig } from "@/lib/config";
 import { formatDate } from "@/lib/utils";
 
 export async function generateStaticParams() {
@@ -20,9 +20,28 @@ export async function generateMetadata({
   const { slug } = await params;
   const article = await getArticle(slug);
   if (!article) return { title: "Not Found" };
+  const category = categories.find((c) => c.id === article.category);
   return {
     title: article.title,
     description: article.description,
+    keywords: [
+      "Claude Code",
+      ...article.tags,
+      category?.label || "",
+      "プロンプト",
+      "使い方",
+    ].filter(Boolean),
+    alternates: {
+      canonical: `${siteConfig.url}/articles/${article.slug}`,
+    },
+    openGraph: {
+      type: "article",
+      title: article.title,
+      description: article.description,
+      publishedTime: article.publishedAt,
+      modifiedTime: article.updatedAt || article.publishedAt,
+      tags: article.tags,
+    },
   };
 }
 
@@ -39,8 +58,24 @@ export default async function ArticlePage({
   const difficulty = difficultyConfig[article.difficulty];
   const articleType = articleTypeConfig[article.type];
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: article.title,
+    description: article.description,
+    datePublished: article.publishedAt,
+    dateModified: article.updatedAt || article.publishedAt,
+    author: { "@type": "Organization", name: "IVYXON", url: "https://ivyxon.com" },
+    publisher: { "@type": "Organization", name: "IVYXON" },
+    keywords: article.tags.join(", "),
+  };
+
   return (
     <div className="mx-auto max-w-5xl px-4 py-8">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Link
         href="/articles"
         className="mb-6 inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-primary transition-colors"

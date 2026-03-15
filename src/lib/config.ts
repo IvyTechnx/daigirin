@@ -1,7 +1,7 @@
 import { Category, Author } from "./types";
 
 export const siteConfig = {
-  name: "初級者向けClaude Code大全",
+  name: "Claude Code Tips",
   subtitle: "Practical Prompt Collection",
   description:
     "Claude Codeに雑に投げてアプリを作る。コピペで使える実践プロンプト集。",

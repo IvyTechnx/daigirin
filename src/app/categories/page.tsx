@@ -18,12 +18,11 @@ export default function CategoriesPage() {
       </p>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {categories.map((cat) => (
-          <div key={cat.id} className="flex flex-col">
-            <CategoryCard category={cat} count={counts.get(cat.id) || 0} />
-            <p className="mt-2 px-1 text-xs text-muted-foreground">
-              {cat.description}
-            </p>
-          </div>
+          <CategoryCard
+            key={cat.id}
+            category={cat}
+            count={counts.get(cat.id) || 0}
+          />
         ))}
       </div>
     </div>

@@ -11,8 +11,8 @@ export function Footer() {
             <span className="font-bold text-[#00D67E]">XON</span>
           </div>
 
-          <p className="text-center text-white/40">
-            AIを活用したソフトウェア開発のご相談はお気軽にどうぞ。
+          <p className="text-center text-sm tracking-wide text-white/40">
+            Making the world better, effortlessly, with AI.
           </p>
 
           <div className="flex gap-6 text-xs text-white/40">
@@ -21,6 +21,9 @@ export function Footer() {
             </Link>
             <Link href="/categories" className="hover:text-[#00D67E] transition-colors">
               カテゴリ
+            </Link>
+            <Link href="/disclaimer" className="hover:text-[#00D67E] transition-colors">
+              免責事項
             </Link>
             <a
               href="https://ivyxon.com"

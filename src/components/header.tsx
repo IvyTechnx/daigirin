@@ -25,7 +25,7 @@ export function Header() {
           <IvyxonLogo />
           <span className="hidden text-xs text-white/40 sm:block">|</span>
           <span className="hidden text-sm font-medium text-white/70 sm:block">
-            Claude Code大全
+            Claude Code Tips
           </span>
         </Link>
 
