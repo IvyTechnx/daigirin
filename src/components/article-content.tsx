@@ -29,7 +29,7 @@ function TableOfContents({ html }: { html: string }) {
   if (items.length === 0) return null;
 
   return (
-    <nav className="hidden lg:block">
+    <nav>
       <div className="sticky top-20">
         <h4 className="mb-3 text-sm font-bold text-foreground">目次</h4>
         <ul className="space-y-1.5 text-sm">
@@ -109,7 +109,7 @@ export function ArticleContent({ html }: { html: string }) {
       <div className="min-w-0 flex-1">
         <EnhancedContent html={html} />
       </div>
-      <div className="w-56 shrink-0">
+      <div className="hidden w-56 shrink-0 lg:block">
         <TableOfContents html={html} />
       </div>
     </div>
