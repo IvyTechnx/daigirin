@@ -26,6 +26,30 @@ export function Footer() {
               免責事項
             </Link>
             <a
+              href="https://ivyxon.com/ustime"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-[#00D67E] transition-colors"
+            >
+              US Stock Time
+            </a>
+            <a
+              href="https://ivyxon.com/etf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-[#00D67E] transition-colors"
+            >
+              ETF解説
+            </a>
+            <a
+              href="https://ivyxon.com/strategy"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-[#00D67E] transition-colors"
+            >
+              投資の考え方
+            </a>
+            <a
               href="https://ivyxon.com"
               target="_blank"
               rel="noopener noreferrer"
