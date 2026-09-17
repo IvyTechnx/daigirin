@@ -14,7 +14,16 @@ export async function generateMetadata({
   params: Promise<{ name: string }>;
 }): Promise<Metadata> {
   const { name } = await params;
-  return { title: `#${decodeURIComponent(name)}` };
+  // タグ一覧は索引であってコンテンツではない（実測: 本文 54 字、他のタグページと
+  // 共有しない独自の散文は 0 字）。45 本あり、tips.ivyxon.com の中で最大の塊だった。
+  // AdSense の承認はドメイン単位で tips も ivyxon.com の審査対象に入るため、
+  // 「有用性の低いコンテンツ」の母数から外す。**follow は残す**ので記事への導線は生きる。
+  // noindex だけでは AdSense のクロールからは外れないので public/robots.txt にも
+  // Disallow を置いてある（両方で1組。片方だけ戻さないこと）。
+  return {
+    title: `#${decodeURIComponent(name)}`,
+    robots: { index: false, follow: true },
+  };
 }
 
 export default async function TagPage({

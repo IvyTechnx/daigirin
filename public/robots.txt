@@ -1,4 +1,45 @@
+# ===========================================================================
+# グループの中に空行を入れないこと。空行を区切りとして扱う実装があり、User-agent 行の
+# 直後に空行があるとそれ以降の Disallow が宙に浮く（Google は空行を無視するので
+# 本番では効いて見え、手元の検算だけが食い違う）。Disallow は Allow より先に書く。
+#
+# `Disallow: /tags/` `/search` — タグ一覧は索引であってコンテンツではない
+#   （実測: 本文 54 字・独自の散文 0 字が 45 本）。/search はクライアント描画なので
+#   クローラから見ると可視 29 字の殻。
+#
+#   **AdSense の承認はドメイン単位**で、tips.ivyxon.com も ivyxon.com の審査対象に
+#   入る。2026-09-17 に ivyxon.com が「有用性の低いコンテンツ」で3回目の差し戻しを
+#   受け、その時点で tips の 94 URL 中 69 本が「独自の散文 200 字未満」だった。
+#
+#   **noindex だけでは足りない。** AdSense のサイト審査はクロールした実物を見るので、
+#   検索の索引から外しても審査の視界からは消えない。src/app/tags/[name]/page.tsx と
+#   src/app/search/layout.tsx の noindex、scripts/build-sitemap.mjs の除外、この
+#   Disallow の3点で1組。片方だけ戻さないこと。
+# ---------------------------------------------------------------------------
+# **広告系クローラにはドメインごと閉じる（2026-09-17）。**
+#
+# このサイトは広告を1枚も載せていない（`adsbygoogle` 0 件）。にもかかわらず AdSense の
+# 承認はドメイン単位なので、tips.ivyxon.com は ivyxon.com の審査対象に入っている。
+# 実測で記事 36 本は本文（コードブロックを除く散文）が中央値 183 字・27 本が 300 字未満、
+# `api-development` は散文 0 字でコードだけだった。**コード例こそがこのサイトの価値**で、
+# 散文を足して嵩を稼ぐのは AdSense がまさに咎める水増しになる。
+#
+# そこで「収益化の対象ではない面」として広告系クローラにだけ閉じる。**検索は従来どおり**
+# （上の `*` グループで Googlebot は /tags/ と /search 以外を取れる）——ここは
+# Claude Code の実務メモとして人に読まれている面なので、索引からは下ろさない。
+#
+# **この3つは `User-agent: *` を無視する**ので名指しが要る。ここが抜けると AdSense に
+# 対してだけ遮断が効かず、robots.txt を目で読んでも気づけない。
+# https://developers.google.com/crawling/docs/crawlers-fetchers/google-special-case-crawlers
+# ===========================================================================
 User-agent: *
+Disallow: /tags/
+Disallow: /search
 Allow: /
+
+User-agent: Mediapartners-Google
+User-agent: AdsBot-Google
+User-agent: AdsBot-Google-Mobile
+Disallow: /
 
 Sitemap: https://tips.ivyxon.com/sitemap.xml
