@@ -98,7 +98,13 @@ export async function generateArticle(topic, sources, existingMetas) {
   const response = await client.messages.create({
     model: MODEL,
     max_tokens: 4096,
-    system: buildSystemPrompt(),
+    system: [
+      {
+        type: "text",
+        text: buildSystemPrompt(),
+        cache_control: { type: "ephemeral" },
+      },
+    ],
     messages: [{ role: "user", content: buildUserPrompt(topic, sources, existingMetas) }],
   });
 

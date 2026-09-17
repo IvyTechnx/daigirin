@@ -59,9 +59,14 @@ export function Footer() {
             </a>
           </div>
 
-          <p className="mt-2 text-xs text-white/30">
-            &copy; 2026 IVYXON. All rights reserved.
-          </p>
+          <div className="mt-2 flex flex-col items-center gap-1">
+            <p className="text-xs font-semibold text-white/50">
+              Polaris LLC（ポラリス合同会社）
+            </p>
+            <p className="text-xs text-white/30">
+              &copy; 2026 IVYXON. All rights reserved.
+            </p>
+          </div>
         </div>
       </div>
     </footer>

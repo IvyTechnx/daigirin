@@ -57,8 +57,16 @@ export default function DisclaimerPage() {
 
         <h2>運営者</h2>
         <p>
-          本サイトはIVYXON（ポラリス合同会社）が運営しています。
+          本サイト「Claude Code Tips」（tips.ivyxon.com）は、
+          <strong>ポラリス合同会社（英文表記: Polaris LLC）</strong>が運営するIVYXONブランドのサイトです。
+          同社は ivyxon.com および そのサブドメインを保有・運営しています。
           お問い合わせは <a href="mailto:support@ivyxon.com">support@ivyxon.com</a> までお願いいたします。
+        </p>
+        <p>
+          This website (tips.ivyxon.com) is owned and operated by{" "}
+          <strong>Polaris LLC</strong> (ポラリス合同会社), a limited liability company
+          registered in Japan. It is a subdomain of{" "}
+          <a href="https://ivyxon.com">ivyxon.com</a>, which is operated by the same company.
         </p>
       </div>
     </div>
